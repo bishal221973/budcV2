@@ -95,7 +95,7 @@ class GoogleController extends Controller
 
         // Save to DB (JSON-encoded)
         GoogleToken::updateOrCreate(
-            ['user_id' => Auth::id() ?? 1], // fallback to ID 1
+            ['user_id' =>  1], // fallback to ID 1
             [
                 'access_token' => json_encode($token),
                 'refresh_token' => $token['refresh_token'] ?? null,
@@ -108,9 +108,9 @@ class GoogleController extends Controller
         session()->save(); // ensure it's saved before redirect
 
         // Optional: Set user if not already authenticated (e.g., mock user login)
-        if (!Auth::check()) {
-            Auth::loginUsingId(1);
-        }
+        // if (!Auth::check()) {
+        //     Auth::loginUsingId(1);
+        // }
 
         // Redirect logic
         $to = Session::get('to');
